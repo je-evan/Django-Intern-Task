@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block title %} All Students lists {% endblock %}
+{%block content %}
+
+<ul>
+  {% for student in students %}
+  <div class="card w-75 my-4">
+    <div class="card-body">
+      <h5 class="card-title">{{ student.name }}</h5>
+      <p class="card-text">{{ student.major }}</p>
+      <a href="{% url 'detail' student.id %}" class="btn btn-primary">Detail</a>
+    </div>
+  </div>
+  {% empty %}
+  <p>No students yet.</p>
+  {% endfor %}
+</ul>
+
+<ul class="pagination my-3">
+  {% if page_obj.has_previous %}
+  <li class="page-item">
+    <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+      >previous</a
+    >
+  </li>
+  {% endif %} 
+  
+  {% if page_obj.has_next or page_obj.has_previous %} 
+    {% for i in page_obj.paginator.page_range %} 
+      {% if page_obj.number == i %}
+        <li class="page-item active"><a class="page-link">{{ i }} </a></li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+      {% endif %} 
+    {% endfor %} 
+  {% endif %} 
+
+  {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+    </li>
+  {% endif %}
+</ul>
+
+{% endblock %}

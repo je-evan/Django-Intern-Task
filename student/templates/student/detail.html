@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %} {{student}} Detail {% endblock %} {%
+block content %}
+<div class="card" style="width: 100%">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name: {{ student.name }}</li>
+    <li class="list-group-item">Age: {{ student.age }}</li>
+    <li class="list-group-item">Address: {{ student.address }}</li>
+    <li class="list-group-item">Grade: {{ student.grade }}</li>
+    <li class="list-group-item">Major: {{ student.major }}</li>
+  </ul>
+  <div class="card-footer">
+    <a class="btn btn-secondary" href="{% url 'update' student.id %}">Update</a>
+    <a class="btn btn-danger" href="{% url 'delete' student.id %}">delete</a>
+  </div>
+</div>
+{% endblock %}
